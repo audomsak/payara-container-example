@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/WEB-INF/templates/sales-main.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+    <f:loadBundle var="msg" basename="/messages" />
+    <ui:define name="title">
+        #{msg.measurement_units_form}
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="form">
+            <p:card>
+                <f:facet name="title">#{msg.measurement_units_form}</f:facet>
+                <h:panelGroup layout="block" styleClass="form-group">
+                    <p:outputLabel for="measurementId" value="#{msg.measurement_units_form_measurementId}"/>
+                    <p:inputText maxlength="5" disabled="#{!measurementUnitController.currentUm.newRecord}" 
+                                 required="true" 
+                                 id="measurementId" 
+                                 value="#{measurementUnitController.currentUm.measurementId}" 
+                                 styleClass="form-control"/>
+                </h:panelGroup>
+                <h:panelGroup layout="block" styleClass="form-group">
+                    <p:outputLabel for="name" value="#{msg.measurement_units_form_name}"/>
+                    <p:inputText maxlength="20" 
+                                 required="true" 
+                                 id="name" 
+                                 value="#{measurementUnitController.currentUm.name}" 
+                                 styleClass="form-control"/>
+                </h:panelGroup>
+                <f:facet name="footer">
+                    <p:commandButton value="#{msg.save}" action="#{measurementUnitController.save}" icon="pi pi-check"/>
+                    |
+                    <p:link outcome="/measurement-unit/index" value="#{msg.cancel}"/>
+                </f:facet>
+            </p:card>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

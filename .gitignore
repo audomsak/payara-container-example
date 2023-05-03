@@ -1,0 +1,9 @@
+**/.gradle
+**/nb-configuration.xml
+**/target
+**/.idea
+**/faces-config.NavData
+**/mysql-volumes
+**/*.war
+**/*.jar
+**/.idea

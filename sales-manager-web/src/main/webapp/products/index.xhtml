@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/WEB-INF/templates/sales-main.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+    <f:loadBundle var="msg" basename="/messages" />
+    <ui:define name="title">
+        #{msg.products}
+    </ui:define>
+    <ui:define name="content">
+        <p:card>
+            <f:facet name="title"> #{msg.products}</f:facet>
+
+            <h:form id="form">
+                <p:toolbar>
+                    <p:toolbarGroup>
+
+                        <p:commandButton action="#{productController.newProductAction}" value="#{msg.product_new}" />
+                    </p:toolbarGroup>
+                </p:toolbar>
+
+                <p:dataTable value="#{productController.productsList}" var="product" id="product" rowKey="#{product.id}">
+                    <f:facet name="header">
+                        <p:selectOneMenu value="#{productController.categorySelected}"  converter="#{categoryConverter}">
+                            <f:selectItems value="#{categoryController.categoriesList}" var="cat" itemLabel="#{cat.name}" itemValue="#{cat}" />
+                            <f:ajax render=":form:product"/>
+                        </p:selectOneMenu>
+                    </f:facet>
+                    <p:column headerText="#{msg.product_name}">
+                        #{product.name}
+                    </p:column>
+                    <p:column headerText="#{msg.product_measurement_unit}">
+                        #{product.measurementUnit.name}
+                    </p:column>
+                    <p:column headerText="#{msg.product_count}">
+                        #{product.totalCount}
+                    </p:column>
+                    <p:column>
+                        <p:commandButton action="#{productMovementController.showMovements}" icon="pi pi-list" title="#{msg.product_movements}" >
+                            <f:param name="productId" value="#{product.id}" />
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </p:card>
+    </ui:define>
+
+</ui:composition>

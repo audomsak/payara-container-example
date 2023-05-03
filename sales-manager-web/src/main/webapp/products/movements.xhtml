@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/WEB-INF/templates/sales-main.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui" >
+    <f:loadBundle var="msg" basename="/messages" />
+    <ui:define name="title">
+        #{msg.product_movements_title}   #{productController.currentProduct.name}
+    </ui:define>
+    <ui:define name="content" >
+        <h:form id="form">
+            <p:card>
+                <f:facet name="title">
+                    #{msg.product_movements_title}   #{productMovementController.currentProduct.name}
+                </f:facet>
+                <p:toolbar>
+                    <p:toolbarGroup>
+                        <p:commandButton action="#{productMovementController.addMovementAction}" value="#{msg.movement_new}" >
+                            <p:ajax event="dialogReturn"   update=":form:dt-movements" />
+                        </p:commandButton>
+                    </p:toolbarGroup>
+                </p:toolbar>
+
+                <p:dataTable id="dt-movements" value="#{productMovementController.movementsProductList}" var="mov" rowKey="#{mov.id}">
+                    <p:column headerText="#{msg.movement_date}">
+                        #{mov.date}
+                    </p:column>
+                    <p:column headerText="#{msg.movement_comment}">
+                        #{mov.comment}
+                    </p:column>
+                    <p:column headerText="#{msg.movement_storehouse}">
+                        #{mov.storeHouse.name}
+                    </p:column>
+                    <p:column headerText="#{msg.movement_type}">
+                        #{mov.type}
+                    </p:column>
+                    <p:column headerText="#{msg.movement_count}">
+                        #{mov.count}
+                    </p:column>
+                    <p:column headerText="#{msg.movement_unitprice}">
+                        #{mov.unitPrice}
+                    </p:column>
+                </p:dataTable>
+            </p:card>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

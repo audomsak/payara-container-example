@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/WEB-INF/templates/sales-main.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <f:loadBundle var="msg" basename="/messages"/>
+    <ui:define name="title">
+        #{msg.measurement_units}
+    </ui:define>
+
+    <ui:define name="content">
+        <p:card>
+            <f:facet name="title">#{msg.measurement_units}</f:facet>
+            <h:form id="form">
+                <p:toolbar>
+                    <p:toolbarGroup>
+                        <p:commandButton value="#{msg.measurement_units_new}" action="#{measurementUnitController.newMeasurementUnit}" />
+                    </p:toolbarGroup>
+                </p:toolbar>
+                <p:dataTable value="#{measurementUnitController.measurementUnitList}" var="mu" id="dt-measurements-list" rowKey="#{mu.measurementId}">
+                    <p:column headerText="#{msg.measurement_units_form_measurementId}">
+                        #{mu.measurementId}
+                    </p:column>
+                    <p:column headerText="#{msg.measurement_units_form_name}">
+                        #{mu.name}
+                    </p:column>
+                    <p:column>
+                        <p:commandButton action="#{measurementUnitController.edit}" title="#{msg.edit}"  icon="pi pi-pencil">
+                            <f:param name="id" value="${mu.measurementId}" />
+                        </p:commandButton>
+                        <p:commandButton action="#{measurementUnitController.delete}" title="#{msg.delete}"  icon="pi pi-trash">
+                            <p:confirm type="popup" header="#{msg.record_delete_btn}" message="#{msg.record_delete_message}" icon="pi pi-info-circle"/>
+                            <f:param name="id" value="${mu.measurementId}" />
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+                <p:confirmPopup global="true">
+                    <p:commandButton value="#{msg.no}" type="button" styleClass="ui-confirm-popup-no ui-button-flat " />
+                    <p:commandButton value="#{msg.yes}" type="button" styleClass="ui-confirm-popup-yes " >
+                        <f:ajax render=":form:dt-measurements-list"/>
+                    </p:commandButton>
+                </p:confirmPopup>
+            </h:form>
+        </p:card>
+    </ui:define>
+
+</ui:composition>

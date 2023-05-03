@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+  payara-server:
+    depends_on:
+      - mysql
+    image: payara/server-full:5.2021.10-jdk11
+    # environment:
+        # LANGUAGE: en_US:en
+        # LANG: en_US.UTF-8
+        # LC_ALL: en_US.UTF-8
+    ports:
+      - '18080:8080'
+      - '14848:4848'
+    volumes:
+      - ./config/post-boot-commands.asadmin:/opt/payara/config/post-boot-commands.asadmin
+      - ./domains/domain1/lib:/opt/payara/appserver/glassfish/domains/domain1/lib
+      - ./deployments:/opt/payara/deployments
+    networks:
+        - salesnet
+  mysql:
+      container_name: mysql_sales
+      image: mysql:8.0
+      environment:
+          MYSQL_ROOT_PASSWORD: root
+          #MYSQL_ROOT_HOST: '%'
+          TZ: Asia/Bangkok
+          MYSQL_USER: sales
+          MYSQL_PASSWORD: sales
+          MYSQL_DATABASE: sales
+      ports:
+          - '3316:3306'
+      #command: --init-file /data/application/init.sql
+      volumes:
+          - ./mysql-volumes:/var/lib/mysql
+          - ./db:/docker-entrypoint-initdb.d
+      networks:
+          - salesnet
+networks:
+    salesnet:
