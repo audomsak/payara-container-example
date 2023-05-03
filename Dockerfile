@@ -11,7 +11,7 @@ COPY --chown=185 sales-manager-web/ sales-manager-web/
 
 RUN mvn clean install -P payara
 
-FROM payara/server-full:5.2022.5-jdk17
+FROM docker.io/payara/server-full:5.2022.5-jdk17
 
 COPY --from=builder --chown=payara:payara /app/containers/payara/deployments/ $DEPLOY_DIR
 COPY --from=builder --chown=payara:payara /app/containers/payara/domains/domain1/lib/ $PAYARA_DIR/glassfish/domains/$DOMAIN_NAME/lib
