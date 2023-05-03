@@ -6,16 +6,16 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>sales-manager-web</name>
-    
+
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <jakartaee>8.0.0</jakartaee>
     </properties>
-    
+
     <dependencies>
         <dependency>
             <groupId>jakarta.platform</groupId>
@@ -39,7 +39,7 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
-    
+
     <build>
         <plugins>
             <plugin>
