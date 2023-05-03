@@ -3,7 +3,7 @@ services:
   payara-server:
     depends_on:
       - mysql
-    image: payara/server-full:5.2021.10-jdk11
+    image: payara/server-full:5.2022.5-jdk17
     # environment:
         # LANGUAGE: en_US:en
         # LANG: en_US.UTF-8
