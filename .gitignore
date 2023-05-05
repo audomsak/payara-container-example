@@ -4,6 +4,8 @@
 **/.idea
 **/faces-config.NavData
 **/mysql-volumes
+**/payara/deployments
+**/payara/lib
 **/*.war
 **/*.jar
 **/.idea
