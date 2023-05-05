@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  payara-server:
+    depends_on:
+      - mysql
+    image: test-payara:latest
+    build:
+      context: ../
+    ports:
+      - '18080:8080'
+      - '14848:4848'
+    networks:
+        - salesnet
+  mysql:
+      container_name: mysql_sales
+      image: mysql:8.0
+      environment:
+          MYSQL_ROOT_PASSWORD: root
+          TZ: Asia/Bangkok
+          MYSQL_USER: sales
+          MYSQL_PASSWORD: sales
+          MYSQL_DATABASE: sales
+      ports:
+          - '3316:3306'
+      volumes:
+          - ./mysql-volumes:/var/lib/mysql
+          - ./db:/docker-entrypoint-initdb.d
+      networks:
+          - salesnet
+networks:
+    salesnet:
