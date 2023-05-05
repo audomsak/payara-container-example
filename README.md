@@ -23,5 +23,5 @@ mvn clean install -P payara
 Then, start containers with `docker-compose` :
 
 ```sh
- docker-compose -f containers/payara/docker-compose.yml up
+ docker-compose -f containers/docker-compose.yml up
  ```

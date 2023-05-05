@@ -84,7 +84,7 @@
                                     <goal>copy</goal>
                                 </goals>
                                 <configuration>
-                                    <outputDirectory>${basedir}/../containers/payara/domains/domain1/lib
+                                    <outputDirectory>${basedir}/../containers/payara/lib
                                     </outputDirectory>
                                     <stripVersion>true</stripVersion>
                                     <artifactItems>

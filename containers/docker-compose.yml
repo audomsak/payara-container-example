@@ -12,9 +12,9 @@ services:
       - '18080:8080'
       - '14848:4848'
     volumes:
-      - ./config/post-boot-commands.asadmin:/opt/payara/config/post-boot-commands.asadmin
-      - ./domains/domain1/lib:/opt/payara/appserver/glassfish/domains/domain1/lib
-      - ./deployments:/opt/payara/deployments
+      - ./payara/post-boot-commands.asadmin:/opt/payara/config/post-boot-commands.asadmin
+      - ./payara/lib:/opt/payara/appserver/glassfish/domains/domain1/lib
+      - ./payara/deployments:/opt/payara/deployments
     networks:
         - salesnet
   mysql:
