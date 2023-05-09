@@ -2,9 +2,9 @@ FROM docker.io/maven:3.9-eclipse-temurin-17 AS builder
 WORKDIR /app
 
 COPY pom.xml .
-COPY --chown=185 sales-manager-api/ sales-manager-api/
-COPY --chown=185 sales-manager-ejb/ sales-manager-ejb/
-COPY --chown=185 sales-manager-web/ sales-manager-web/
+COPY sales-manager-api/ sales-manager-api/
+COPY sales-manager-ejb/ sales-manager-ejb/
+COPY sales-manager-web/ sales-manager-web/
 
 RUN mvn clean install -P payara
 
