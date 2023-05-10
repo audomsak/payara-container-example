@@ -1,5 +1,5 @@
 undeploy sales-manager-ejb
 undeploy sales-manager-web
-create-jdbc-connection-pool --maxpoolsize=4 --poolresize=1 --steadypoolsize=1 --ping=true --pooling=true --restype=javax.sql.ConnectionPoolDataSource --datasourceclassname=com.mysql.cj.jdbc.MysqlConnectionPoolDataSource --property Password=sales:User=sales:serverTimezone=Asia/Bangkok:useSSL=false:AllowPublicKeyRetrieval=true:DatabaseName=sales:RequireSSL=false:ServerName=mysql_sales:fish.payara.log-jdbc-calls=true salesPool
+create-jdbc-connection-pool --maxpoolsize=4 --poolresize=1 --steadypoolsize=1 --ping=true --pooling=true --restype=javax.sql.ConnectionPoolDataSource --datasourceclassname=com.mysql.cj.jdbc.MysqlConnectionPoolDataSource --property Password=sales:User=sales:serverTimezone=Asia/Bangkok:useSSL=false:AllowPublicKeyRetrieval=true:DatabaseName=sales:RequireSSL=false:ServerName=sales-db:fish.payara.log-jdbc-calls=true salesPool
 create-jdbc-resource --connectionpoolid salesPool jdbc/sales
 
