@@ -1,0 +1,27 @@
+FROM docker.io/audomsak/payara-full:latest
+
+ENV APP_DIR=/opt/app \
+    DEPLOYMENT_ARTIFACT_DIR=/opt/app/containers/payara/deployments \
+    LIB_ARTIFACT_DIR=/opt/app/containers/payara/lib
+
+USER root
+RUN mkdir -p ${APP_DIR} \
+    && mkdir -p ${DEPLOYMENT_ARTIFACT_DIR} \
+    && mkdir -p ${LIB_ARTIFACT_DIR} \
+    && chown -R 185 ${APP_DIR}
+
+COPY --chown=185 pom.xml ${APP_DIR}/pom.xml
+COPY --chown=185 sales-manager-api/ ${APP_DIR}/sales-manager-api/
+COPY --chown=185 sales-manager-ejb/ ${APP_DIR}/sales-manager-ejb/
+COPY --chown=185 sales-manager-web/ ${APP_DIR}/sales-manager-web/
+COPY --chown=185 containers/payara/post-boot-commands.asadmin $POSTBOOT_COMMANDS_FINAL
+
+RUN cd ${APP_DIR} && mvn clean install -P payara
+
+RUN cp ${APP_DIR}/containers/payara/deployments/* ${DEPLOY_DIR}/ \
+    && cp ${APP_DIR}/containers/payara/lib/* ${PAYARA_DIR}/glassfish/domains/${DOMAIN_NAME}/lib/ \
+    && rm -rf ${APP_DIR} \
+    && chown 185:root ${POSTBOOT_COMMANDS_FINAL} \
+    && chmod 777 ${POSTBOOT_COMMANDS_FINAL}
+
+USER 185

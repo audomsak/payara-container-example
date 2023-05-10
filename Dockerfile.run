@@ -1,0 +1,10 @@
+FROM docker.io/audomsak/payara-full:latest
+
+COPY --chown=185 containers/payara/deployments/ $DEPLOY_DIR/
+COPY --chown=185 containers/payara/lib/ $PAYARA_DIR/glassfish/domains/$DOMAIN_NAME/lib/
+COPY --chown=185 containers/payara/post-boot-commands.asadmin $POSTBOOT_COMMANDS_FINAL
+
+USER root
+RUN chmod 777 $POSTBOOT_COMMANDS_FINAL
+
+USER 185

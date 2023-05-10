@@ -13,3 +13,5 @@ FROM docker.io/payara/server-full:5.2022.5-jdk17
 COPY --from=builder --chown=payara:payara /app/containers/payara/deployments/ $DEPLOY_DIR
 COPY --from=builder --chown=payara:payara /app/containers/payara/lib/ $PAYARA_DIR/glassfish/domains/$DOMAIN_NAME/lib
 COPY --chown=payara:payara containers/payara/post-boot-commands.asadmin $POSTBOOT_COMMANDS_FINAL
+
+USER payara
