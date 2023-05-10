@@ -3,9 +3,10 @@ services:
   payara-server:
     depends_on:
       - mysql
-    image: test-payara:latest
+    image: sale-manager:latest
     build:
       context: ../
+      dockerfile: Dockerfile.multi-stage
     ports:
       - '18080:8080'
       - '14848:4848'
